@@ -1,0 +1,19 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebGIS App</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Sensebox-Bike data Viewer</h1>
+
+    <textarea id="sqlQuery" rows="5" cols="50"></textarea><br>
+    <button onclick="executeQuery()">Run Query</button> <button onclick="removeLayers()">Remove Layers</button>
+
+    
+    <div id="map" style="height: 500px;"></div>
+    <script src="/static/scripts.js" charset="utf-8"></script>
+</body>

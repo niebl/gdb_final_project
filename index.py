@@ -1,12 +1,8 @@
-from flask import Flask
-import asyncio
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello world</p>"
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-def fetch_sensebox_data():
-    #todo
-    return
