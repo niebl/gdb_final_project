@@ -1,1 +1,6 @@
 Flask
+
+SQLAlchemy
+python-dotenv
+psycopg2-binary
+GeoAlchemy2
