@@ -5,6 +5,19 @@ final project for geodatabases course
 
 note to self: conda environment is called gdb_final
 
+## how to run
+1. set up your postgis database.
+for this i used a docker container with the following parameters:
+```
+username="gdb",
+port="5432",
+database="gdb_db",
+password="gdb",
+```
+use the commands in init.sql to set up the required tables
+
+2. run the fetch.py script. This may take a while as it attempts to load all bike-box measurements on opensensemap
+
 ## functionality.
 This project is to consist of 2 components:
 	1. Server
