@@ -1,3 +1,3 @@
 #!/bin/bash
 export FLASK_APP=index
-flask run
+flask --debug run
