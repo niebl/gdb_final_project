@@ -8,7 +8,7 @@ const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.pn
 	maxZoom: 19
 }).addTo(map);
 
-		// Function to execute SQL query and add GeoJSON data to the map
+// Function to execute SQL query and add GeoJSON data to the map
 function executeQuery() {
 	const query = document.getElementById('sqlQuery').value;
 	axios.post('/execute-sql', { query })
@@ -41,15 +41,14 @@ function executeQuery() {
 
 function findCategories() {
 	const query = "SELECT DISTINCT(measurement_type) FROM osem_bike_measurements;"
-	axios.post('/execute-sql', {query})
-	.then(
+	const promise = axios.post('/execute-sql', {query})
+	
+	const outData = promise.then(
 		response => {
-			console.log(response.data)
 			category_list = []
 			for (let row of response.data){
 				category_list.push(row[0])
 			}
-			console.log(category_list)
 			return category_list
 		})
 	.catch(error => {
