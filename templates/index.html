@@ -15,19 +15,13 @@
 </head>
 <body>
     <h1>Sensebox-Bike data Viewer</h1>
-
-    <textarea id="sqlQuery" rows="5" cols="50"></textarea><br>
     
-
-    <button onclick="executeQuery()">Run Query</button> <button onclick="removeLayers()">Remove Layers</button>
-
     <p>
         <label for="category">Measurement category:</label>
         <select name="category" id="category">
             <option value="none">None</option>
         </select>
     </p>
-
 
     <p>
         <label for="amount">Date Range:</label>
@@ -37,8 +31,11 @@
     <div id="slider-range"></div>
     <br>
 
+    <button onclick="fetchData()">Get Data</button> <button onclick="removeLayers()">Remove Layers</button>
         
-    <div id="map" style="height: 500px;"></div>
+    <br>
+
+    <div id="map" style="height: 600px;"></div>
 
     <script src="/static/scripts.js" charset="utf-8"></script>
 </body>

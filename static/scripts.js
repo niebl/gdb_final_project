@@ -9,8 +9,28 @@ const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.pn
 }).addTo(map);
 
 // Function to execute SQL query and add GeoJSON data to the map
-function executeQuery() {
-	const query = document.getElementById('sqlQuery').value;
+
+// Function to remove all layers except the tile layer
+function removeLayers() {
+	map.eachLayer(function(layer) {
+		if (layer !== tileLayer) {
+			map.removeLayer(layer);
+		}
+	});
+}
+
+function fetchData() {
+	//get parameters from the website elements
+	const earliest = Math.floor($("#slider-range").slider("values", 0) / 1000)
+	const latest = Math.ceil($("#slider-range").slider("values", 1) / 1000)
+	const category = $("#category").val()
+
+	const query = `SELECT measurement_time, measurement_type, measurement_value, measurement_unit, ST_AsGeoJSON(position) FROM osem_bike_measurements WHERE measurement_type = '${category}' AND measurement_time >= to_timestamp(${earliest}) AND measurement_time <= to_timestamp(${latest})`
+
+	//clear map
+	removeLayers()
+
+	console.log(query)
 	axios.post('/execute-sql', { query })
 	.then(response => {
 		console.log(response.data);
@@ -37,6 +57,7 @@ function executeQuery() {
 		console.error(error);
 		alert('Error executing query: ' + (error.response?.data?.error || error.message));
 	});
+
 }
 
 function findCategories() {
