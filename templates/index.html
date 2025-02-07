@@ -3,17 +3,34 @@
 <html>
 <head>
     <title>WebGIS App</title>
+    <link rel="stylesheet" href="static/styles.css">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 </head>
 <body>
     <h1>Sensebox-Bike data Viewer</h1>
 
     <textarea id="sqlQuery" rows="5" cols="50"></textarea><br>
+    
+
     <button onclick="executeQuery()">Run Query</button> <button onclick="removeLayers()">Remove Layers</button>
 
-    
+    <p>
+        <label for="amount">Date Range:</label>
+        <input type="text" id="amount" readonly="" style="border:0; color:#f6931f; font-weight:bold; width: 100%;">
+    </p>
+
+    <div id="slider-range"></div>
+    <br>
+
+        
     <div id="map" style="height: 500px;"></div>
+
     <script src="/static/scripts.js" charset="utf-8"></script>
 </body>
