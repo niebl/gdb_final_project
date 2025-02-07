@@ -85,6 +85,15 @@ function unixToDatetime(unixString){
 	return output
 }
 
+function initiateMeasurementCategories(category_list){
+	$.each(category_list, function (i, item) {
+    	$('#category').append($('<option>', { 
+        	value: item,
+        	text : item 
+    	}));
+	});
+}
+
 // -------------------------------------------
 // 	MAIN
 // -------------------------------------------
@@ -92,6 +101,9 @@ function unixToDatetime(unixString){
 async function main(){
 	const date_range = await findDateRange()
 	const category_list = await findCategories()
+
+	//initiate category list
+	initiateMeasurementCategories(category_list)
 
 	//initiate slider
 	$( function() {

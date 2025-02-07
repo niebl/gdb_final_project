@@ -4,7 +4,7 @@
 <head>
     <title>WebGIS App</title>
     <link rel="stylesheet" href="static/styles.css">
-    
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -20,6 +20,14 @@
     
 
     <button onclick="executeQuery()">Run Query</button> <button onclick="removeLayers()">Remove Layers</button>
+
+    <p>
+        <label for="category">Measurement category:</label>
+        <select name="category" id="category">
+            <option value="none">None</option>
+        </select>
+    </p>
+
 
     <p>
         <label for="amount">Date Range:</label>
