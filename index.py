@@ -38,24 +38,37 @@ def execute_sql():
         colnames = [desc[0] for desc in cursor.description]
 
         # Convert rows to GeoJSON if it's spatial data
-        features = []
-        for row in rows:
-            # Assuming the last column is a GeoJSON geometry (adjust as needed)
-            properties = {colnames[i]: row[i] for i in range(len(colnames) - 1)}
-            geometry = json.loads(row[-1])  # Last column should be GeoJSON geometry
-            features.append({
-                "type": "Feature",
-                "geometry": geometry,
-                "properties": properties
-            })
+        try:
+            features = []
+            for row in rows:
+                # Assuming the last column is a GeoJSON geometry (adjust as needed)
+                properties = {colnames[i]: row[i] for i in range(len(colnames) - 1)}
+                geometry = json.loads(row[-1])  # Last column should be GeoJSON geometry
+                features.append({
+                    "type": "Feature",
+                    "geometry": geometry,
+                    "properties": properties
+                })
 
-        # Close the connection
-        cursor.close()
-        conn.close()
+            # Close the connection
+            cursor.close()
+            conn.close()
 
-        # Return the result as GeoJSON
-        return jsonify(features)
+            # Return the result as GeoJSON
+            return jsonify(features)
+
+        except:
+            #this is in case no geojson formatted geometry was returned in the last col
+            # Close the connection
+            cursor.close()
+            conn.close()
+
+            return jsonify(rows)
+
 
     except Exception as e:
         print(e)
+        data = request.json
+        query = data.get('query', '')
+        print(query)
         return jsonify({"error": str(e)}), 500

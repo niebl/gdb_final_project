@@ -38,3 +38,23 @@ function executeQuery() {
 		alert('Error executing query: ' + (error.response?.data?.error || error.message));
 	});
 }
+
+function findCategories() {
+	const query = "SELECT DISTINCT(measurement_type) FROM osem_bike_measurements;"
+	axios.post('/execute-sql', {query})
+	.then(
+		response => {
+			console.log(response.data)
+			category_list = []
+			for (let row of response.data){
+				category_list.push(row[0])
+			}
+			console.log(category_list)
+			return category_list
+		})
+	.catch(error => {
+		console.error(error);
+		alert('Error executing query: ' + (error.response?.data?.error || error.message));
+	})
+
+}
