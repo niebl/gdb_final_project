@@ -25,7 +25,15 @@ function fetchData() {
 	const latest = Math.ceil($("#slider-range").slider("values", 1) / 1000)
 	const category = $("#category").val()
 
-	const query = `SELECT measurement_time, measurement_type, measurement_value, measurement_unit, ST_AsGeoJSON(position) FROM osem_bike_measurements WHERE measurement_type = '${category}' AND measurement_time >= to_timestamp(${earliest}) AND measurement_time <= to_timestamp(${latest})`
+	//check for measurement-value filter
+	const value_filter = $("#value_filter").val()
+	const value_filter_operator = $("#value_filter_operator").val()
+
+	let query = `SELECT measurement_time, measurement_type, measurement_value, measurement_unit, ST_AsGeoJSON(position) FROM osem_bike_measurements WHERE measurement_type = '${category}' AND measurement_time >= to_timestamp(${earliest}) AND measurement_time <= to_timestamp(${latest})`
+
+	if (value_filter_operator != "any"){
+		query = query + ` AND measurement_value::decimal ${value_filter_operator} ${value_filter};`
+	}
 
 	//clear map
 	removeLayers()
@@ -46,9 +54,6 @@ function fetchData() {
 					}
 				}
 			}).addTo(map);
-
-						// Fit the map to the bounds of the GeoJSON layer
-			map.fitBounds(geoJsonLayer.getBounds());
 		} else {
 			alert('No data returned!');
 		}

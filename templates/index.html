@@ -31,6 +31,16 @@
     <div id="slider-range"></div>
     <br>
 
+    <p>
+        <label for="value_filter_operator">measurement value:</label>
+        <select name="value_filter_operator" id="value_filter_operator">
+            <option value="any">any</option>
+            <option value="<="><=</option>
+            <option value=">=">>=</option>
+        </select>
+        <input type="number" id="value_filter" value="0" >
+    </p>
+
     <button onclick="fetchData()">Get Data</button> <button onclick="removeLayers()">Remove Layers</button>
         
     <br>
